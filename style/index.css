@@ -1,0 +1,77 @@
+:root {
+    --black: #000000;
+    --lightgray: #E3E3E3;
+    --brightgreen: #84E62D;
+    --mediumgreen: #63C60C;
+  }
+  
+/*global styles*/
+body {
+    background-color: #E3E3E3
+}
+
+.bodytext {
+    font-family: "GT-America-Regular", Helvetica;
+    font-size: 20px;
+}
+
+/*header*/
+
+#header {
+    padding-top: 3vh;
+    padding-bottom: 20vh;
+    box-sizing: border-box;
+}
+
+#logotype {
+    font-family: "Thunder-Bold", Helvetica;
+    font-size: 30px;
+    position: relative;
+}
+
+#about {
+    font-family: "GT-America-Regular", Helvetica;
+    text-align: right;
+}
+
+.header-column {
+    float: left;
+    width: 50%;
+}
+
+/*intro styles*/
+#intro-scroll-container {
+    height: 400vh;
+}
+
+#intro-container {
+    margin: auto;
+    max-width: 90vw;
+    height: 100vh;
+}
+
+.intro-column1 {
+    float: left;
+    width: 40%;
+    padding-right: 20px;
+}
+
+.slash {
+    position: absolute;
+    transform: translateX(15vw) translateY(-5vh);
+    height: 70vh;
+}
+
+.svg-1 {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    transform: translateX(-45vw) translateY(-30vh);
+}
+
+circle {
+    fill: var(--mediumgreen);
+  }
+
+
+  
