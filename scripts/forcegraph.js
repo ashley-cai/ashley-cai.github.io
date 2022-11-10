@@ -46,7 +46,6 @@ function add(number) {
             y: (Math.random()-.5)*5000,
         }
     }))
-
     simulation.nodes(nodes).on("tick", ticked);
 }
 
@@ -64,7 +63,6 @@ function ticked() {
 		.attr('cy', function(d) {
 			return d.y
 		})
-        .on("mousedown", mousedownCanvas);
     
 }
 
@@ -106,6 +104,71 @@ function unfade(element) {
 
 years = document.querySelectorAll(".year")
 
+yearTrillions = [
+    {
+    year: "1989",
+    trillionTop: "24.3",
+    trillionBottom: "14.1"
+    },
+    {
+        year: "1992",
+        trillionTop: "23.1",
+        trillionBottom: "13.6"
+    },
+    {
+        year: "1995",
+        trillionTop: "25.8",
+        trillionBottom: "14.9"
+    },
+    {
+        year: "1998",
+        trillionTop: "33.8",
+        trillionBottom: "18.7"
+    },
+    {
+        year: "2001",
+        trillionTop: "45.6",
+        trillionBottom: "23.8"
+    },
+    {
+        year: "2004",
+        trillionTop: "51.2",
+        trillionBottom: "26.6"
+    },
+    {
+        year: "2007",
+        trillionTop: "62.1",
+        trillionBottom: "29.2"
+    },
+    {
+        year: "2010",
+        trillionTop: "56.7",
+        trillionBottom: "25"
+    },
+    {
+        year: "2013",
+        trillionTop: "60.5",
+        trillionBottom: "26.5"
+    },
+    {
+        year: "2016",
+        trillionTop: "78.8",
+        trillionBottom: "30.8"
+    },
+    {
+        year: "2019",
+        trillionTop: "82.4",
+        trillionBottom: "32.5"
+    },
+]
+
+yearTrillions.forEach( function (element) {
+    var div = document.createElement("div");
+    div.classList = "subtext year"
+    div.id = "y" + element.year;
+    div.innerHTML = element.year;
+    document.getElementById("year-container").appendChild(div);
+})
 
 
 //ADDING NODES
