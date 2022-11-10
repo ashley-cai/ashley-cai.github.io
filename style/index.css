@@ -15,6 +15,12 @@ body {
     font-size: 20px;
 }
 
+
+.subtext {
+    font-family: "GT-America-Regular", Helvetica;
+    font-size: 12px;
+}
+
 /*header*/
 
 #header {
@@ -48,6 +54,8 @@ body {
     margin: auto;
     max-width: 90vw;
     height: 100vh;
+    position: sticky;
+    top: 0;
 }
 
 .intro-column1 {
@@ -56,10 +64,15 @@ body {
     padding-right: 20px;
 }
 
+#intro-p2 {
+    opacity: 0;
+}
+
 .slash {
     position: absolute;
-    transform: translateX(15vw) translateY(-5vh);
-    height: 70vh;
+    transform: translateX(20vw);
+    height: 65vh;
+    opacity: 0;
 }
 
 .svg-1 {
@@ -71,7 +84,28 @@ body {
 
 circle {
     fill: var(--mediumgreen);
-  }
+}
 
+#intro-split-trigger {
+    position: absolute;
+    transform: translateY(200vh);
+}
 
-  
+#intro-gain-trigger-1989 {
+    position: absolute;
+    transform: translateY(300vh);
+}
+
+.year {
+    text-align: right;
+    opacity: 0;
+}
+
+#year-container {
+    position: absolute;
+    right: 0;
+}
+
+#y1989 {
+    opacity: 1;
+}

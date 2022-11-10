@@ -4,33 +4,51 @@ var width = vw, height = vh
 
 console.log(width)
 
-var numNodes1 = 96 //starting 1/8 trillions of the top 10%
-var numNodes2 = 56 //starting 1/8 trillions of the top 10%
+var numNodes1 = 192 //starting 1/8 trillions of the top 10%
+var numNodes2 = 112 //starting 1/8 trillions of the top 10%
 var nodes = d3.range(numNodes1).map(function(d) {
 	return {
         radius: 5,
-        group: 1
+        group: 1,
+        x: (Math.random()-.5)*5000,
+        y: (Math.random()-.5)*5000,
     }
 })
 
-var nodes = nodes.concat(d3.range(numNodes2).map(function(d) {
+nodes = nodes.concat(d3.range(numNodes2).map(function(d) {
 	return {
         radius: 5,
-        group: 2
+        group: 2,
+        x: (Math.random()-.5)*5000,
+        y: (Math.random()-.5)*5000,
     }
 }))
 
 console.log(nodes)
 
 var simulation = d3.forceSimulation(nodes)
-	.force('charge', d3.forceManyBody().strength(-5))
-	.force('center', d3.forceCenter(width*7 / 10, height / 2))
-    .force('x', d3.forceX(width*7 / 10))
+    .force('charge', d3.forceManyBody().strength(-5))
+    .force('x', d3.forceX(width* 7/10))
     .force('y', d3.forceY(height / 2))
-	.force('collision', d3.forceCollide().radius(function(d) {
-		return d.radius
-	}))
-	.on('tick', ticked);
+    .force('collision', d3.forceCollide().radius(function(d) {
+        return d.radius
+    }))
+    .alphaDecay(0)
+    .alpha(.6)
+    .on('tick', ticked);
+
+function add(number) {
+    nodes = nodes.concat(d3.range(number).map(function(d) {
+        return {
+            radius: 5,
+            group: 1,
+            x: (Math.random()-.5)*5000,
+            y: (Math.random()-.5)*5000,
+        }
+    }))
+
+    simulation.nodes(nodes).on("tick", ticked);
+}
 
 function ticked() {
 	var u = d3.select('.svg-1')
@@ -46,189 +64,64 @@ function ticked() {
 		.attr('cy', function(d) {
 			return d.y
 		})
+        .on("mousedown", mousedownCanvas);
+    
 }
 
 function split() {
+    
     simulation.force('x', d3.forceX(function(d) {
         if (d.group == 1) {
-            return 1/10*vw;
+            return 7/10*vw;
         } else {
-            return 2.5/10*vw;
+            return 8/10*vw;
         }
     }))
-        .force('y', d3.forceY(function(d) {
+    .force('y', d3.forceY(function(d) {
             if (d.group == 1) {
-                return 1/10*vh;
+                return 4/10*vh;
             } else {
-                return 6/10*vh;
+                return 8/10*vh;
             }
         }))
-    }
 
-    split()
+    var slash = document.querySelector(".slash");
+    unfade(slash);
 
-var nodesToAdd = []
+    var p2 = document.getElementById("intro-p2");
+    unfade(p2);
+}
 
-for (let i = 0; i < 100; i++) {
-    nodesToAdd.push({
-      // initial position of nodes
-      x: (width * Math.sin(Math.random() * (2 * Math.PI))),
-      y: (width * Math.cos(Math.random() * (2 * Math.PI))),
-      delay: Math.random() * (10 * 1000),
-      // new position of nodes
-      targetX: width*7 / 10,
-      targetY : height / 2,
-      group: 1
-    });
-  }
+function unfade(element) {
+    var op = 0.1;  // initial opacity
+    var timer = setInterval(function () {
+        if (op >= 1){
+            clearInterval(timer);
+        }
+        element.style.opacity = op;
+        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op += op * 0.1;
+    }, 10);
+}
 
-// const wd = 500
-// const ht = 500
-
-// d3.select(".container")
-// .style("text-align", "center")
-
-// const svgC = d3.select('.container').append("svg")
-// .attr("height", ht)
-// .attr("width", wd)
-// .style("background-color", "none")
-// .style("overflow", "hidden")
-// ;
-
-// const svgVB = d3.select("divC").append("svg")
-// .attr("preserveAspectRatio","xMidYMid meet")
-// .attr("viewBox", "0 0 100 100")
-// .classed("svg-content", true);
-
-// let colsC 
-// let rnf = Math.random()
-
-// if(rnf < 0.25) {
-//   colsC = d3.interpolateMagma
-// }else{
-//   if (rnf< 0.5) {
-//     colsC = d3.interpolateViridis
-//   }else{
-//     if( rnf < 0.75 ) {
-//       colsC = d3.interpolateTurbo
-//     }else{
-//       colsC = d3.interpolateRainbow
-//     }
-//   }
-// }
-
-// const numnodes = 350
-
-// let rScale = d3.scaleLinear()
-// .range([3,20, 80]) //scale of the radisu of the circles
-// .domain([0,0.8,2]);
-
-// let colScale = d3.scaleLinear()
-// .range(["yellow","#ff2222","#ff55ff", "pink", "#fffcc3","#eeffbb"])
-// .domain([3,8,15,30,73,80]);
-
-// const lineFunc = d3.line()
-// .x(d=>d.x)
-// .y(d=>d.y)
-
-// let nodes = []
-// let nx, ny, rd, elem
-
-// let stars = []
-
-// for (j=0; j<100 ; j++) { //how many paths
-
-//   let pathData = []
-
-//   let pointNum = 5 + Math.floor(Math.random()*10)
-
-// let x = 50
-// let y = 50
-
-// let cx = x/2
-// let cy = y/2
-// let r = d3.max([cx,cy])
-
-// let rOne = r -  r*Math.random()*0.3 
-// let rTwo = r*Math.random()*0.3 + (r*0.3)
-
-// for (i=0;i<pointNum;i++) { //how many spikes
+years = document.querySelectorAll(".year")
 
 
-//   let nx = cx + rOne * Math.cos(2 * Math.PI * i/pointNum);
-//   let ny = cy + rOne * Math.sin(2 * Math.PI * i/pointNum);
 
-//   pathData.push({x: nx, y:ny})
-//   let nx2 = cx + rTwo * Math.cos(2 * Math.PI * (i/pointNum + (1/pointNum/2)  )) ;
-//   let ny2 = cy + rTwo * Math.sin(2 * Math.PI * (i/pointNum + (1/pointNum/2)  ));
+//ADDING NODES
+  //SCROLL TRIGGERS
+  const wrapper = document.getElementById("intro-scroll-container");
 
-//   pathData.push({x: nx2, y:ny2})
-// }
+  gsap.registerPlugin(ScrollTrigger);
 
-// pathData.push(pathData[0])
-// let newPath = lineFunc(pathData)
+  ScrollTrigger.create({
+    trigger: "#intro-split-trigger",
+    markers: true,
+    onEnter: () => split(),
+  });
 
-// stars.push({
-//   path:newPath,
-//   rad: rOne,
-//   col: colsC(Math.random())
-// })
-
-// }
-// console.log(stars)
-
-
-// for (i=0;i<numnodes;i++) {
-// nx = Math.abs(normal())
-// rd = rScale(nx)
-// elem = {rd:rd}
-// nodes.push(elem)
-// };
-
-// const force = d3.forceSimulation(stars)
-//         .force("charge", d3.forceManyBody().strength(0.5))
-//         .force("center", d3.forceCenter(wd*0.5,ht*0.5))
-//         .force("collision", d3.forceCollide().radius(function(d) {
-//           return d.rad + 0.5
-//         }))
-//         .on("tick", ticked);
-
-// force.velocityDecay(0.5).alphaDecay(0.005)
-
-// function ticked() {
-//   let u = svgC
-//   .selectAll("path")
-//   .data(stars)
-
-//   u.enter()
-//   .append("path")
-//   .attr("d", function(d) {
-//     return d.path
-//   })
-//   .merge(u)
-//   .attr("transform", (d)=>{
-//     return "translate(" + d.x +", " + d.y + ")"
-//   })
-//   .attr("fill", "none")
-//   .attr("stroke",function(d){
-//     return d.col
-//   })
-//   .attr("stroke-width", "1.5px");
-
-//   u.exit().remove()
-// }
-
-// // from http://bl.ocks.org/mbostock/4349187
-// // Sample from a normal distribution with mean 0, stddev 1.
-// function normal() {
-//     let x = 0,
-//         y = 0,
-//         rds, c;
-//     do {
-//         x = Math.random() * 2 - 1;
-//         y = Math.random() * 2 - 1;
-//         rds = x * x + y * y;
-//     } while (rds == 0 || rds > 1);
-//     c = Math.sqrt(-2 * Math.log(rds) / rds); // Box-Muller transform
-//     return x * c; // throw away extra sample y * c
-// }
+  ScrollTrigger.create({
+    trigger: "#intro-gain-trigger-1989 ",
+    markers: true,
+    onEnter: () => add(37),
+  });
