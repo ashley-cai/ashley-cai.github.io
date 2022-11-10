@@ -152,7 +152,7 @@ yearTrillions.slice(1).forEach( function (element, index) {
     div.classList = "intro-trigger-timeline";
     div.id = "intro-trigger-" + element.year;
     div.style.position = "absolute";
-    div.style.transform = "translateY(" + (index*50+300) + "vh)"
+    div.style.transform = "translateY(" + (index*50+200) + "vh)"
     document.getElementById("intro-container").appendChild(div);
 })
 

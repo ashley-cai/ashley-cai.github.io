@@ -89,7 +89,7 @@ circle {
 
 #intro-split-trigger {
     position: absolute;
-    transform: translateY(200vh);
+    transform: translateY(150vh);
 }
 
 .year {
