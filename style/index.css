@@ -1,13 +1,14 @@
 :root {
     --black: #000000;
     --lightgray: #E3E3E3;
+    --mediumgray: #808080;
     --brightgreen: #84E62D;
     --mediumgreen: #63C60C;
   }
   
 /*global styles*/
 body {
-    background-color: #E3E3E3
+    background-color: var(--lightgray)
 }
 
 .bodytext {
@@ -47,7 +48,7 @@ body {
 
 /*intro styles*/
 #intro-scroll-container {
-    height: 400vh;
+    height: 1000vh;
 }
 
 #intro-container {
@@ -78,7 +79,7 @@ body {
 .svg-1 {
     position: absolute;
     width: 100vw;
-    height: 100vh;
+    height: 120vh;
     transform: translateX(-45vw) translateY(-30vh);
 }
 
@@ -91,19 +92,16 @@ circle {
     transform: translateY(200vh);
 }
 
-#intro-gain-trigger-1989 {
-    position: absolute;
-    transform: translateY(300vh);
-}
-
 .year {
     text-align: right;
     opacity: 0;
 }
 
 #year-container {
+    padding-left: 8px;
     position: absolute;
     right: 0;
+    border-left: 1px solid var(--mediumgray);
 }
 
 #y1989 {
