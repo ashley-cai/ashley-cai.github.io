@@ -285,46 +285,48 @@ function changeForward(i) {
 function changeBackward(i) {
     console.log("backward" + i)
 
-    triltop = (yearTrillions[i].trillionTop - yearTrillions[i+1].trillionTop) * 10
-    trilbot = (yearTrillions[i].trillionBottom - yearTrillions[i+1].trillionBottom) * 10
+    if (i < yearTrillions.length-1) {
+        triltop = (yearTrillions[i].trillionTop - yearTrillions[i+1].trillionTop) * 10
+        trilbot = (yearTrillions[i].trillionBottom - yearTrillions[i+1].trillionBottom) * 10
 
-    console.log("triltop" + triltop)
+        console.log("triltop" + triltop)
 
-    if(triltop > 0) {
-        nodes = addNodes(triltop, 1)
-    } else {
-        nodes = removeNodes(triltop*-1, 1)
-    }
-
-    if(trilbot > 0) {
-        nodes = addNodes(trilbot, 2)
-    } else {
-        nodes = removeNodes(trilbot*-1, 2)
-    }
-
-    simulation.nodes(nodes).on("tick", ticked)
-    .force('x', d3.forceX(function(d) {
-        if (d.group == 1) {
-            return (6/10-(i/100))*vw;
+        if(triltop > 0) {
+            nodes = addNodes(triltop, 1)
         } else {
-            return (8/10-(i/100))*vw;
+            nodes = removeNodes(triltop*-1, 1)
         }
-    }))
-    .force('y', d3.forceY(function(d) {
-        if (d.group == 1) {
-            return 4/10*vh;
+
+        if(trilbot > 0) {
+            nodes = addNodes(trilbot, 2)
         } else {
-            return (8/10-(i/100))*vh;
+            nodes = removeNodes(trilbot*-1, 2)
         }
-    }))
 
-    year = document.getElementById("y"+yearTrillions[i].year)
-    year.style.opacity = 1;
-    oldYear = document.getElementById("y"+yearTrillions[i+1].year)
-    oldYear.style.opacity = 0;
+        simulation.nodes(nodes).on("tick", ticked)
+        .force('x', d3.forceX(function(d) {
+            if (d.group == 1) {
+                return (6/10-(i/100))*vw;
+            } else {
+                return (8/10-(i/100))*vw;
+            }
+        }))
+        .force('y', d3.forceY(function(d) {
+            if (d.group == 1) {
+                return 4/10*vh;
+            } else {
+                return (8/10-(i/100))*vh;
+            }
+        }))
 
-    yearspan = document.getElementById("year-span")
-    yearspan.innerHTML = yearTrillions[i].year;
+        year = document.getElementById("y"+yearTrillions[i].year)
+        year.style.opacity = 1;
+        oldYear = document.getElementById("y"+yearTrillions[i+1].year)
+        oldYear.style.opacity = 0;
+
+        yearspan = document.getElementById("year-span")
+        yearspan.innerHTML = yearTrillions[i].year;
+    }
 
 }
 

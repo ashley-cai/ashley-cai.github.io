@@ -4,11 +4,16 @@
     --mediumgray: #AAAAAA;
     --brightgreen: #84E62D;
     --mediumgreen: #63C60C;
+    --length-top: 0px;
+    --length-slash: 0px;
+    --length-bottom: 0px;
+
   }
   
 /*global styles*/
 body {
-    background-color: var(--lightgray)
+    background-color: var(--lightgray);
+    margin: 0;
 }
 
 .bodytext {
@@ -31,7 +36,7 @@ body {
 }
 
 #logotype {
-    font-family: "Thunder-Bold", Helvetica;
+    font-family: "Thunder-SemiBold", Impact;
     font-size: 40px;
     position: relative;
 }
@@ -126,7 +131,82 @@ circle {
     font-size: 12px;
 }
 
-/* TITLE */
+/* TITLE STYLES*/
+/* TITLE STYLES*/
+/* TITLE STYLES*/
+#title-section {
+    height: 120vh;
+    width: 100vw;
+    background-color: var(--brightgreen);
+
+}
+
+#title-content-wrapper {
+    margin: auto;
+    width: 90vw;
+}
+
 #title {
-    height: 100vh;
+    padding-top: 46vh;
+    font-family: "Thunder-SemiBoldLC", Impact;
+    font-size: 14vw;
+    position: relative;
+    width: 50vw;
+    line-height: 80%;
+}
+
+#title-copy {
+    width: 35vw;
+}
+
+.title-column1 {
+    float: left;
+    width: 40%;
+    padding-right: 20px;
+}
+
+#percent {
+    padding-top: 25vh;
+    float: right;
+    width: 40vw;
+}
+
+.bottom-percent {
+    stroke-dasharray: var(--length-bottom);
+    stroke-dashoffset: var(--length-bottom);
+}
+
+.bottom-animate {
+    animation: dash 1s ease-in forwards;
+  }
+  @keyframes dash {
+    from {
+        stroke-dashoffset: var(--length-bottom);
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+  }
+
+.top-percent {
+    stroke-dasharray: var(--length-top);
+    stroke-dashoffset: var(--length-top);
+}
+
+  .top-animate {
+    animation: dash 1s ease-in forwards;
+  }
+  @keyframes dash {
+    from {
+        stroke-dashoffset: var(--length-top);
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+  }
+
+  /* BODY */
+#body {
+    background-color: var(--mediumgreen);
+    height: 500vh;
 }
