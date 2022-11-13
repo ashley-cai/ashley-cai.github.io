@@ -3,8 +3,6 @@ const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeig
 var width = vw, height = vh
 var radius = 5;
 
-console.log(width)
-
 var numNodes1 = 243 //starting 1/8 trillions of the top 10%
 var numNodes2 = 14 //starting 1/8 trillions of the top 10%
 var nodes = d3.range(numNodes1).map(function(d) {
@@ -134,20 +132,25 @@ yearTrillions.forEach( function (element) {
 })
 
 years = document.querySelectorAll(".year")
-console.log(years)
 
 //SCROLL TRIGGERS
   const wrapper = document.getElementById("intro-scroll-container");
 
   gsap.registerPlugin(ScrollTrigger);
 
+
   ScrollTrigger.create({
-    trigger: "#intro-split-trigger",
-    markers: true,
-    onEnter: () => split(),
+    trigger: "#intro-reverse-split-trigger",
+    onEnterBack: () => reverseSplit(),
   });
 
-yearTrillions.slice(1).forEach( function (element, index) {
+  ScrollTrigger.create({
+    trigger: "#intro-split-trigger",
+    onEnter: () => split(),
+    onEnterBack: () => changeBackward(0),
+  });
+
+yearTrillions.forEach( function (element, index) {
     var div = document.createElement("div");
     div.classList = "intro-trigger-timeline";
     div.id = "intro-trigger-" + element.year;
@@ -156,20 +159,28 @@ yearTrillions.slice(1).forEach( function (element, index) {
     document.getElementById("intro-container").appendChild(div);
 })
 
-console.log(yearTrillions.slice(1))
-console.log(yearTrillions)
+ScrollTrigger.create({
+    trigger: "#intro-trigger-1989",
+    onEnterBack: () => changeBackward(1),
+  })
 
 yearTrillions.slice(1).forEach( function (element, index) {
   ScrollTrigger.create({
     trigger: "#intro-trigger-" + element.year,
-    markers: true,
-    onEnter: () => change(index+1),
+    onEnter: () => changeForward(index+1),
+    onEnterBack: () => changeBackward(index+2),
   })
 })
 
+const endSticky = document.getElementById("end-intro-scroll-trigger");
+
+ScrollTrigger.create({
+    trigger: "#end-intro-scroll-trigger",
+    onEnter: () => function() { endSticky.style.position = "relative" },
+  });
+
 //ANIMATED CHANGES
   function split() {
-    
     simulation.force('x', d3.forceX(function(d) {
         if (d.group == 1) {
             return 6/10*vw;
@@ -192,6 +203,17 @@ yearTrillions.slice(1).forEach( function (element, index) {
     unfade(p2);
 }
 
+function reverseSplit() {
+    simulation.force('x', d3.forceX(width* 6/10))
+    .force('y', d3.forceY(height / 2))
+
+    var slash = document.querySelector(".slash");
+    fade(slash);
+
+    var p2 = document.getElementById("intro-p2");
+    fade(p2);
+}
+
 function unfade(element) {
     var op = 0.1;  // initial opacity
     var timer = setInterval(function () {
@@ -204,8 +226,21 @@ function unfade(element) {
     }, 10);
 }
 
+function fade(element) {
+    var op = 1;  // initial opacity
+    var timer = setInterval(function () {
+        if (op <= 0.01){
+            clearInterval(timer);
+        }
+        element.style.opacity = op;
+        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op -= op * 0.1;
+    }, 10);
+}
+
 //CHANGE FOR EACH YEAR
-function change(i) {
+function changeForward(i) {
+    console.log("forward" + i)
     triltop = (yearTrillions[i].trillionTop - yearTrillions[i-1].trillionTop) * 10
     trilbot = (yearTrillions[i].trillionBottom - yearTrillions[i-1].trillionBottom) * 10
 
@@ -247,8 +282,53 @@ function change(i) {
 
 }
 
+function changeBackward(i) {
+    console.log("backward" + i)
+
+    triltop = (yearTrillions[i].trillionTop - yearTrillions[i+1].trillionTop) * 10
+    trilbot = (yearTrillions[i].trillionBottom - yearTrillions[i+1].trillionBottom) * 10
+
+    console.log("triltop" + triltop)
+
+    if(triltop > 0) {
+        nodes = addNodes(triltop, 1)
+    } else {
+        nodes = removeNodes(triltop*-1, 1)
+    }
+
+    if(trilbot > 0) {
+        nodes = addNodes(trilbot, 2)
+    } else {
+        nodes = removeNodes(trilbot*-1, 2)
+    }
+
+    simulation.nodes(nodes).on("tick", ticked)
+    .force('x', d3.forceX(function(d) {
+        if (d.group == 1) {
+            return (6/10-(i/100))*vw;
+        } else {
+            return (8/10-(i/100))*vw;
+        }
+    }))
+    .force('y', d3.forceY(function(d) {
+        if (d.group == 1) {
+            return 4/10*vh;
+        } else {
+            return (8/10-(i/100))*vh;
+        }
+    }))
+
+    year = document.getElementById("y"+yearTrillions[i].year)
+    year.style.opacity = 1;
+    oldYear = document.getElementById("y"+yearTrillions[i+1].year)
+    oldYear.style.opacity = 0;
+
+    yearspan = document.getElementById("year-span")
+    yearspan.innerHTML = yearTrillions[i].year;
+
+}
+
 function addNodes(i, group) {
-    console.log(nodes)
     newNodes = nodes.concat(d3.range(i).map(function(d) {
         return {
             radius: radius,
@@ -262,8 +342,6 @@ function addNodes(i, group) {
 
 function removeNodes(i, group) {
     j = 0;
-    console.log("i:" + i)
-    console.log("j:" + j)
     newNodes = nodes.filter(
         function(ele){ 
         if (j < i && ele.group == group) {
@@ -272,7 +350,6 @@ function removeNodes(i, group) {
             return ele;
         }
     });
-    console.log(newNodes)
     return newNodes;
 }
 

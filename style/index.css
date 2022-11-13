@@ -32,7 +32,7 @@ body {
 
 #logotype {
     font-family: "Thunder-Bold", Helvetica;
-    font-size: 30px;
+    font-size: 40px;
     position: relative;
 }
 
@@ -48,7 +48,7 @@ body {
 
 /*intro styles*/
 #intro-scroll-container {
-    height: 1000vh;
+    height: 800vh;
 }
 
 #intro-container {
@@ -61,7 +61,7 @@ body {
 
 .intro-column1 {
     float: left;
-    width: 40%;
+    width: 35%;
     padding-right: 20px;
 }
 
@@ -87,9 +87,15 @@ circle {
     fill: var(--mediumgreen);
 }
 
+
+#intro-reverse-split-trigger {
+    position: absolute;
+    transform: translateY(120vh);
+}
+
 #intro-split-trigger {
     position: absolute;
-    transform: translateY(150vh);
+    transform: translateY(180vh);
 }
 
 .year {
@@ -106,4 +112,13 @@ circle {
 
 #y1989 {
     opacity: 1;
+}
+
+#end-intro-trigger {
+    position: absolute;
+}
+
+/* TITLE */
+#title {
+    height: 500vh;
 }
