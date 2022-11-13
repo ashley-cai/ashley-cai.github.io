@@ -1,7 +1,7 @@
 :root {
     --black: #000000;
     --lightgray: #E3E3E3;
-    --mediumgray: #808080;
+    --mediumgray: #AAAAAA;
     --brightgreen: #84E62D;
     --mediumgreen: #63C60C;
   }
@@ -118,7 +118,15 @@ circle {
     position: absolute;
 }
 
+#citation {
+    transform: translateY(40vh);
+    padding-top: 8px;
+    border-top: 1px solid var(--mediumgray);;
+    color: var(--mediumgray);
+    font-size: 12px;
+}
+
 /* TITLE */
 #title {
-    height: 500vh;
+    height: 100vh;
 }
