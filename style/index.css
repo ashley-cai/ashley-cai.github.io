@@ -22,6 +22,11 @@ body {
 }
 
 
+.graph-title {
+    font-family: "GT-America-Regular", Helvetica;
+    font-size: 40px;
+}
+
 .subtext {
     font-family: "GT-America-Regular", Helvetica;
     font-size: 12px;
@@ -238,9 +243,11 @@ circle {
 
 .column1 {
     flex: 50%;
+    margin-left: 5vw;
 }
 
 .body-graph-container {
+    padding-top: 20vh;
     top:0;
     position: sticky;
 }
@@ -256,7 +263,18 @@ circle {
 }
 
 .body-slash {
-    height: 60vh;
-    transform: translateX(20vw) translateY(20vh);
+    height: 50vh;
+    transform: translateX(20vw);
     
+}
+
+.body-circle {
+    fill: var(--black);
+}
+
+.body-svg {
+    position: absolute;
+    width: 80vw;
+    height: 120vh;
+    transform: translateX(-20vw);
 }
