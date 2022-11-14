@@ -18,9 +18,10 @@ console.log(lengthBottom)
   let tl = gsap.timeline({
     scrollTrigger: {
       trigger: "#title-section",
-      start: "top top",
+      start: "top center",
       onEnter: () => animate(),
       onLeave: () => unAnimate(),
+      onLeaveBack: () => unAnimate(),
       onEnterBack: () => animate(),
     },
   });

@@ -27,12 +27,21 @@ body {
     font-size: 12px;
 }
 
+.subhead {
+    font-family: "Thunder-SemiBold", Impact;
+    font-size: 40px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
 /*header*/
 
 #header {
     padding-top: 3vh;
     padding-bottom: 20vh;
     box-sizing: border-box;
+    width: 90vw;
+    margin: auto;
 }
 
 #logotype {
@@ -53,7 +62,7 @@ body {
 
 /*intro styles*/
 #intro-scroll-container {
-    height: 800vh;
+    height: 750vh;
 }
 
 #intro-container {
@@ -95,12 +104,12 @@ circle {
 
 #intro-reverse-split-trigger {
     position: absolute;
-    transform: translateY(120vh);
+    transform: translateY(30vh);
 }
 
 #intro-split-trigger {
     position: absolute;
-    transform: translateY(180vh);
+    transform: translateY(150vh);
 }
 
 .year {
@@ -144,6 +153,8 @@ circle {
 #title-content-wrapper {
     margin: auto;
     width: 90vw;
+    padding-bottom: 20vh;
+
 }
 
 #title {
@@ -166,9 +177,9 @@ circle {
 }
 
 #percent {
-    padding-top: 25vh;
+    padding-top: 35vh;
     float: right;
-    width: 40vw;
+    width: 35vw;
 }
 
 .bottom-percent {
@@ -207,6 +218,45 @@ circle {
 
   /* BODY */
 #body {
-    background-color: var(--mediumgreen);
-    height: 500vh;
+    background-color: var(--brightgreen);
+    height: 480vh;
+    padding-top: 30vh;
+}
+
+.body-header {
+    top:0;
+    position: sticky;
+}
+
+#body-graph1 {
+    padding-top: 20vh;
+}
+
+#body-content-wrapper {
+    display: flex;
+}
+
+.column1 {
+    flex: 50%;
+}
+
+.body-graph-container {
+    top:0;
+    position: sticky;
+}
+
+.column2 {
+    flex: 35%;
+    padding-right: 80px;
+    padding-left: 60px;
+}
+
+.steps {
+    padding-top: 50vh;
+}
+
+.body-slash {
+    height: 60vh;
+    transform: translateX(20vw) translateY(20vh);
+    
 }
