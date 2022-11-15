@@ -6,6 +6,10 @@
         src: url(fonts/GT-America-Regular.otf) format("truetype");
     }
     @font-face {
+        font-family: "GT-America-Bold";
+        src: url(fonts/GT-America-Bold.otf) format("truetype");
+    }
+    @font-face {
         font-family: "Thunder-SemiBold";
         src: url(fonts/Thunder-SemiBoldLC.woff) format("truetype");
     }
@@ -112,7 +116,10 @@
 
         <div class="column1">
             <div class="body-graph-container">
-                <div id="graph-title" class="graph-title">TITLE</div>
+                <div id="graph-title" class="graph-title">Percent of all U.S. workers belonging to a union over time</div>
+                <div id="graph-label-top" class="subtext">1954</div>
+                <div id="graph-label-bottom" class="subtext">2013</div>
+
                 <svg class="body-svg">
                 </svg>
                 <svg class="body-slash" width="298" height="534" viewBox="0 0 298 534" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -156,8 +163,8 @@
                     <br>
                     If workers get >50% support, they can ask the employer to recognize the union voluntarily and the next step can be skipped. However, management often files challenges against union petitions at this stage.                </div>
             </div>
-
             <div id="body-graph5" class="steps">
+                <div id="trigger-end"></div>
                 <div class="subhead">STEP 5: Vote to recognize the union</div>
                 <div>
                     The National Labor Relations Board schedules the election. If workers achieve at least 50% support, the union is recognized. 
@@ -166,6 +173,8 @@
                     Congratulations! You have helped construct the foundation of labor power and helped us collectively take a step toward reclaiming our percent.
                 </div>
             </div>
+            <img id="end-img" src="assets/end.png">
+
         </div>
     </div>
 </div>

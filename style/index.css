@@ -23,12 +23,14 @@ body {
 
 
 .graph-title {
-    font-family: "GT-America-Regular", Helvetica;
-    font-size: 40px;
+    font-family: "GT-America-Bold", Helvetica;
+    font-weight: bold;
+    font-size: 20px;
+    padding-bottom: 40px;
 }
 
 .subtext {
-    font-family: "GT-America-Regular", Helvetica;
+    font-family: "GT-America-Bold", Helvetica;
     font-size: 12px;
 }
 
@@ -229,16 +231,19 @@ circle {
 }
 
 .body-header {
-    top:0;
+    top: 0;
     position: sticky;
+    padding-bottom: 10vh !important;
+    opacity: 0;
 }
 
 #body-graph1 {
-    padding-top: 20vh;
+    padding-top: 40vh;
 }
 
 #body-content-wrapper {
     display: flex;
+    background-color: var(--brightgreen);
 }
 
 .column1 {
@@ -264,8 +269,7 @@ circle {
 
 .body-slash {
     height: 50vh;
-    transform: translateX(20vw);
-    
+    transform: translateX(15vw);
 }
 
 .body-circle {
@@ -276,5 +280,21 @@ circle {
     position: absolute;
     width: 80vw;
     height: 120vh;
-    transform: translateX(-20vw);
+    transform: translateX(-20vw) translateY(-5vw);
+}
+
+#graph-label-top {
+    transform: translateY(5vh);
+}
+
+#graph-label-bottom {
+    transform: translateY(48vh);
+}
+
+#end-img {
+    transform: translateX(-50vw) translateY(-50vh);
+}
+
+#body-graph5 {
+    padding-bottom: 0px;
 }
